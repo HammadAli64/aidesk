@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import NewsCard from "@/components/NewsCard";
 import Loader from "@/components/Loader";
 import { newsApi, NewsArticle } from "@/lib/api";
 import { useSearchParams } from "next/navigation";
 
-export default function CategoriesPage() {
+function CategoriesContent() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -181,6 +181,14 @@ export default function CategoriesPage() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function CategoriesPage() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <CategoriesContent />
+    </Suspense>
   );
 }
 
