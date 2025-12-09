@@ -20,9 +20,78 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Futuristic background + subtle noise for AI feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.25), transparent 28%),
+    radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.2), transparent 25%),
+    radial-gradient(circle at 60% 60%, rgba(236, 72, 153, 0.12), transparent 35%),
+    linear-gradient(120deg, rgba(10, 10, 10, 0.75), rgba(15, 23, 42, 0.9));
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M80 1.5 158.5 80 80 158.5 1.5 80Z' fill='none' stroke='rgba(255,255,255,0.04)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -1;
+  pointer-events: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.2);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(94, 234, 212, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0);
+  }
+}
+
+.glass-panel {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.card-aurora {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-aurora::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: conic-gradient(from 180deg, rgba(59, 130, 246, 0.35), rgba(16, 185, 129, 0.35), rgba(236, 72, 153, 0.35), rgba(59, 130, 246, 0.35));
+  filter: blur(16px);
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+  z-index: 0;
+}
+
+.card-aurora:hover::before {
+  opacity: 0.8;
+  transform: scale(1.03);
+}
+
+.card-surface {
+  position: relative;
+  z-index: 1;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
